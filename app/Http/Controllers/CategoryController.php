@@ -2,39 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\StatusEnum;
+use App\Http\Requests\category\CreateCategoryRequest;
+use App\Http\Requests\category\EditCategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+    private Category $category;
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Class constructor.
      */
+    public function __construct(Category $category)
+    {
+        $this->category = $category;
+    }
+
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('page.category.category',['categories' => $categories, 'status' => StatusEnum::cases()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view('page.category.add-category', ['status' => StatusEnum::cases()]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(CreateCategoryRequest $request)
     {
-        //
+        $this->category->create($request->validated());
+        redirect('category');
     }
 
     /**
@@ -48,37 +52,24 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('page.category.edit-category', ['status' => StatusEnum::cases(), 'category' => $category]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(EditCategoryRequest $request,Category $category)
     {
-        //
+        $request->validated();
+        $category->category_name = $request->category_name;
+        $category->status = $request->status;
+        $category->save();
+        return redirect('/category');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+   
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect('/category');
     }
 }

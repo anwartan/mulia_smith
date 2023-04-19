@@ -38,4 +38,9 @@ class Product extends Model
             return true;
         });
     }
+
+    public function getRouteKeyName(): string
+    {
+        return 'sku';
+    }
 }

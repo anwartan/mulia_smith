@@ -58,17 +58,15 @@ class ProductController extends Controller
     }
 
  
-    public function edit($id)
+    public function edit( Product $product)
     {
-        $product = $this->productService->getProductBySku($id);
         return view('page.product.edit-product', ['status' => ProductStatusEnum::cases(), 'product' => $product]);
     }
 
 
-    public function update(EditProductRequest $request, $sku)
+    public function update(EditProductRequest $request, Product $product)
     {
         $request->validated();
-        $product = $this->productService->getProductBySku($sku);
         $image = $this->productService->handleUploadImage($request->file('image_path'));
         $product->product_name = $request->product_name;
         $product->product_description = $request->product_description;
@@ -83,9 +81,8 @@ class ProductController extends Controller
     }
 
    
-    public function destroy($sku)
+    public function destroy(Product $product)
     {
-        $product = $this->productService->getProductBySku($sku);
         $product->delete();
         return redirect('/product');
     }
