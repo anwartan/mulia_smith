@@ -16,4 +16,10 @@ return [
     'important'                     => 'Important',
     'warning'                       => 'Warning',
     'information'                   => 'Information',
+    'user_section'                  => 'USER',
+    'user'                          => 'User',
+    'product_section'               => 'PRODUCT',
+    'product'                       => 'Product',
+    'master_data_section'           => 'MASTER DATA',
+    'category'                      => 'Category'
 ];
