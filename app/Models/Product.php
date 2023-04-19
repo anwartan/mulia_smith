@@ -44,4 +44,9 @@ class Product extends Model
     {
         return 'sku';
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

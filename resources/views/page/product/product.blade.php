@@ -27,7 +27,7 @@
                     return 'badge-success';
             }
         }
-        $heads = ['SKU', 'Product Name', 'Status', 'Created At', 'Updated At', ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
+        $heads = ['SKU', 'Product Name', 'Category', 'Status', 'Created At', 'Updated At', ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
         $data = [];
         
         foreach ($products as $value) {
@@ -52,7 +52,7 @@
                                     </form>';
             $btnDetails = '';
             $status = '<span class="badge ' . getStatus($value->status->value) . '">' . $value->status->value . '</span>';
-            $data[] = [$value->sku, $value->product_name, $status, $value->created_at, $value->updated_at, '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>'];
+            $data[] = [$value->sku, $value->product_name, $value->category->category_name, $status, $value->created_at, $value->updated_at, '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>'];
         }
         $config = [
             'data' => $data,
