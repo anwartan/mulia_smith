@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ProductStatusEnum;
+use App\Enums\StatusEnum;
 use App\Http\Controllers\Utils\ProductMapper;
 use App\Http\Requests\product\EditProductRequest;
 use App\Http\Requests\product\CreateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use App\Services\Contract\ProductService;
 use App\Utils\FileUpload;
@@ -35,7 +37,8 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('page.product.add-product', ['status' => ProductStatusEnum::cases()]);
+        $activeCategories = Category::where("status",StatusEnum::ACTIVE)->get();
+        return view('page.product.add-product', ['status' => ProductStatusEnum::cases(), 'categories' =>$activeCategories ]);
     }
 
  
@@ -60,7 +63,9 @@ class ProductController extends Controller
  
     public function edit( Product $product)
     {
-        return view('page.product.edit-product', ['status' => ProductStatusEnum::cases(), 'product' => $product]);
+        $activeCategories = Category::where("status",StatusEnum::ACTIVE)->get();
+
+        return view('page.product.edit-product', ['status' => ProductStatusEnum::cases(), 'product' => $product,'categories' =>$activeCategories ]);
     }
 
 

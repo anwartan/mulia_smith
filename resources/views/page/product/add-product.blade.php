@@ -34,6 +34,13 @@
                                 label="Product Name" enable-old-support />
                         </div>
 
+                        <x-adminlte-select2 name="category_id" label="Category Product">
+                            <option value="0">Select an option...</option>
+                            @foreach ($categories as $item)
+                                <option value="{{ $item->id }}">{{ $item->category_name }}</option>
+                            @endforeach
+                        </x-adminlte-select2>
+
                         <div class="form-group">
                             <x-adminlte-select name="status" label="Status" enable-old-support>
                                 @php
@@ -66,7 +73,7 @@
                             </x-adminlte-input>
                         </div>
                         <div class="form-group">
-                            <x-adminlte-input-file enable-old-support label="image"
+                            <x-adminlte-input-file enable-old-support label="Image"
                                 accept="image/png, image/gif, image/jpeg" name="image_path" id="image_path"
                                 placeholder="Choose Image">
                             </x-adminlte-input-file>
@@ -108,7 +115,7 @@
 @stop
 @section('plugins.Summernote', true)
 @section('plugins.BsCustomFileInput', true)
-
+@section('plugins.Select2', true)
 @section('css')
 
 @stop

@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\product;
 
+use App\Rules\CategoryActive;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateProductRequest extends FormRequest
 {
@@ -30,6 +32,7 @@ class CreateProductRequest extends FormRequest
             'link_url_tokopedia'=>'url',
             'status'=>'required',
             'image_path' => 'required|mimetypes:image/png,image/jpeg,image/svg|max:5120',
+            'category_id' => new CategoryActive
         ];
     }
 }

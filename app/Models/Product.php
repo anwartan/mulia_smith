@@ -18,7 +18,8 @@ class Product extends Model
         'image_path',
         'link_url_shopee',
         'link_url_tokopedia',
-        'status'
+        'status',
+        'category_id'
     ];
 
     protected $hidden = [

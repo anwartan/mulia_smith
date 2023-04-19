@@ -34,6 +34,14 @@
                                 label="Product Name" enable-old-support value="{{ $product->product_name }}" />
                         </div>
 
+                        <x-adminlte-select2 name="category_id" label="Category Product">
+                            <option value="0">Select an option...</option>
+                            @foreach ($categories as $item)
+                                <option @if ($item->id == $product->category_id) selected @endif value="{{ $item->id }}">
+                                    {{ $item->category_name }}</option>
+                            @endforeach
+                        </x-adminlte-select2>
+
                         <div class="form-group">
                             <x-adminlte-select name="status" label="Status" enable-old-support>
                                 @php
@@ -117,7 +125,7 @@
 @stop
 @section('plugins.Summernote', true)
 @section('plugins.BsCustomFileInput', true)
-
+@section('plugins.Select2', true)
 @section('css')
 
 @stop

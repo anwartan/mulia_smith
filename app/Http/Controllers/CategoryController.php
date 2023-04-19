@@ -30,15 +30,15 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $categories = Category::all();
         return view('page.category.add-category', ['status' => StatusEnum::cases()]);
-
     }
 
 
     public function store(CreateCategoryRequest $request)
     {
         $this->category->create($request->validated());
-        redirect('category');
+        return redirect('category');
     }
 
     /**

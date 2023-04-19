@@ -22,6 +22,7 @@ class CreateProductTable extends Migration
             $table->string('status');
             $table->string('link_url_shopee');
             $table->string('link_url_tokopedia');
+            $table->string('category_id');
             $table->timestamps();
         });
     }

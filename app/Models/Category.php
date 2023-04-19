@@ -25,6 +25,11 @@ class Category extends Model
         'status' => StatusEnum::class,
     ];
 
+    public function isActive()
+    {
+        return $this->status == StatusEnum::ACTIVE;
+    }
+
     
     protected static function boot()
     {
