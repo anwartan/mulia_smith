@@ -77,19 +77,43 @@
                             </x-adminlte-input>
                         </div>
                         <div class="form-group">
-                            <x-adminlte-input-file enable-old-support label="image"
+                            <x-adminlte-input-file enable-old-support label="Image"
                                 accept="image/png, image/gif, image/jpeg" name="image_path" id="image_path"
                                 placeholder="Choose Image">
                             </x-adminlte-input-file>
                         </div>
                         @php
-                            $data = [$product->image_path, $product->image_path . '1'];
+                            $data = [$product->image_path];
                         @endphp
-                        <x-file-viewer name="old_image_path" file="{{ $product->image_path }}"></x-file-viewer>
+                        <x-file-viewer name="old_image_path" file="{{ $product->image_path }}"
+                            path="{{ $product->full_image_path }}"></x-file-viewer>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Product Sales</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <x-adminlte-input id="product_weight" name="weight" type="number"
+                                placeholder="Enter product weight" label="Product Weight (gram)" enable-old-support
+                                min="0" step="0.01" value="0.00" value="{{ $product->productSale->weight }}" />
+                        </div>
+                        <div class="form-group">
+                            <x-adminlte-input id="product_cost" name="cost" type="number"
+                                placeholder="Enter product cost" value="0" label="Product Cost (cost/gram)"
+                                enable-old-support value="{{ $product->productSale->cost }}" />
+                        </div>
+                    </div>
+                </div>
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Product Description</h3>
@@ -106,8 +130,8 @@
                                     'height' => '200',
                                 ];
                             @endphp
-                            <x-adminlte-text-editor name="product_description" :config="$config" label="Product Description"
-                                enable-old-support>
+                            <x-adminlte-text-editor name="product_description" :config="$config"
+                                label="Product Description" enable-old-support>
                                 {{ $product->product_description }}
                             </x-adminlte-text-editor>
                         </div>
@@ -118,7 +142,7 @@
         <div class="row pb-4">
             <div class="col-12">
                 <a href="{{ url()->previous() }}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Edit New Product" class="btn btn-success float-right">
+                <input type="submit" value="Edit Product" class="btn btn-success float-right">
             </div>
         </div>
     </form>
@@ -140,6 +164,11 @@
 
                 window.open(link, "_blank")
             })
+            $('#product_weight').change(setTwoNumberDecimal);
+
+            function setTwoNumberDecimal(event) {
+                this.value = parseFloat(this.value).toFixed(2);
+            }
         })
     </script>
 @stop

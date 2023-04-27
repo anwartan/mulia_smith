@@ -9,6 +9,7 @@ use App\Http\Requests\product\EditProductRequest;
 use App\Http\Requests\product\CreateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductSale;
 use App\Services\Contract\ProductService;
 use App\Utils\FileUpload;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class ProductController extends Controller
 {
    
     private ProductService $productService;
+    
     private Product $product;
 
     /**
@@ -48,9 +50,8 @@ class ProductController extends Controller
         $image = $this->productService->handleUploadImage($request->file('image_path'));
         $product = $request->validated();
         $product['image_path'] = $image;
-        $this->product->create($product);
-        
-
+        $newProduct = $this->product->create($product);
+        $newProduct->productSale()->create($product);
         return redirect('/product');
     }
 
@@ -81,6 +82,11 @@ class ProductController extends Controller
         $product->link_url_shopee = $request->link_url_shopee;
         $product->link_url_tokopedia = $request->link_url_tokopedia;
         $product->status = $request->status;
+
+        $product->productSale->cost=$request->cost;
+        $product->productSale->weight=$request->weight;
+        $product->push();
+
         $product->save();
         return redirect('/product');
     }

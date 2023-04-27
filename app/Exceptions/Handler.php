@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\ResponseMapper;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -32,6 +34,10 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->renderable(function (AuthenticationException $e, $request) {
+            if ($request->is('api/*')) {
+                return ResponseMapper::error($e->getMessage(), "Unauthenticated.",401);
+            }
+        });
     }
 }

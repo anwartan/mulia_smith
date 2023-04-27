@@ -32,7 +32,9 @@ class CreateProductRequest extends FormRequest
             'link_url_tokopedia'=>'url',
             'status'=>'required',
             'image_path' => 'required|mimetypes:image/png,image/jpeg,image/svg|max:5120',
-            'category_id' => new CategoryActive
+            'category_id' => new CategoryActive,
+            'weight' => 'required|numeric|between:0.01,99.99',
+            'cost' => 'required|numeric|between:1000,99999'
         ];
     }
 }

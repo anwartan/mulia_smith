@@ -19,7 +19,8 @@ class Product extends Model
         'link_url_shopee',
         'link_url_tokopedia',
         'status',
-        'category_id'
+        'category_id',
+        
     ];
 
     protected $hidden = [
@@ -30,10 +31,13 @@ class Product extends Model
         'status' => ProductStatusEnum::class,
     ];
 
+    protected $appends = ['full_image_path'];
+
     protected static function boot()
     {
         parent::boot();
         static::creating(function ($model) {
+            
             $size = count(Product::all())+1;
             $model->sku = 'SKU'.$size;
             return true;
@@ -48,5 +52,14 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function productSale()
+    {
+        return $this->hasOne(ProductSale::class);
+    }
+    public function getFullImagePathAttribute()
+    {
+        return url('files/'.$this->image_path);
     }
 }

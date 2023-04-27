@@ -84,6 +84,29 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
+                        <h3 class="card-title">Product Sales</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <x-adminlte-input id="product_weight" name="weight" type="number"
+                                placeholder="Enter product weight" label="Product Weight (gram)" enable-old-support
+                                min="0" step="0.01" value="0.00" />
+                        </div>
+                        <div class="form-group">
+                            <x-adminlte-input id="product_cost" name="cost" type="number"
+                                placeholder="Enter product cost" value="0" label="Product Cost (cost/gram)"
+                                enable-old-support />
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary">
+                    <div class="card-header">
                         <h3 class="card-title">Product Description</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -103,6 +126,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <div class="row pb-4">
@@ -130,6 +154,12 @@
 
                 window.open(link, "_blank")
             })
+
+            $('#product_weight').change(setTwoNumberDecimal);
+
+            function setTwoNumberDecimal(event) {
+                this.value = parseFloat(this.value).toFixed(2);
+            }
         })
     </script>
 @stop

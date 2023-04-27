@@ -1,5 +1,6 @@
 @php
-    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+    
+    $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
     
     $icon = 'fa-file';
     if ($ext == 'pdf') {
@@ -10,10 +11,10 @@
         $icon = 'fa-file-image';
     }
 @endphp
-@if (!empty($file))
+@if (!empty($path))
     <span class="list-attachment">
-        <input type="hidden" name="{{ $name }}" value="{{ $file }}" />
-        <a target="_blank" href="{{ URL::to('/') . '/files/' . $file }}" class="btn-link text-secondary"><i
+        <input type="hidden" name="{{ $name }}" value="{{ $path }}" />
+        <a target="_blank" href="{{ $path }}" class="btn-link text-secondary"><i
                 class="far fa-fw {{ $icon }}"></i>
             {{ $file }} </a>
     </span>
