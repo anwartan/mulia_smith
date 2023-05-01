@@ -3,8 +3,10 @@
 namespace App\Exceptions;
 
 use App\Helpers\ResponseMapper;
+use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Redirect;
 
 class Handler extends ExceptionHandler
 {
@@ -37,6 +39,11 @@ class Handler extends ExceptionHandler
         $this->renderable(function (AuthenticationException $e, $request) {
             if ($request->is('api/*')) {
                 return ResponseMapper::error($e->getMessage(), "Unauthenticated.",401);
+            }
+        });
+        $this->renderable(function (BusinessException $e, $request) {
+            if (!$request->is('api/*')) {
+                return back()->withInput()->with('business_exception',$e->getMessage());
             }
         });
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ Route::post('/login', [UserController::class, 'login']);
 
 Route::get("/products",[ProductController::class, 'index']);
 Route::get("/products/{product}",[ProductController::class, 'detail']);
+Route::get("/category/filter",[CategoryController::class, 'filter']);
 
 
 Route::middleware('auth:sanctum')->group(function() {

@@ -16,4 +16,8 @@ interface ProductService
     public function getProductBySku(string $sku): Product;
 
     public function handleUploadImage($file): string;
+
+    public function createProduct(array $product);
+
+    public function updateProduct(array $data, Product $product);
 }

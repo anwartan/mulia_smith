@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\category;
 
+use App\Rules\Uppercase;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateCategoryRequest extends FormRequest
@@ -24,6 +25,7 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
+            'category_code' => ['required','max:4','min:4','unique:categories,category_code',new Uppercase],
             'category_name' => 'required|max:255',
             'status'=>'required',
         ];

@@ -13,6 +13,7 @@ class Category extends Model
 
     protected $fillable = [
         'category_name', 
+        'category_code',
         'uuid', 
         'status'
     ];
@@ -43,5 +44,10 @@ class Category extends Model
     public function getRouteKeyName(): string
     {
         return 'uuid';
+    }
+
+    public function product() 
+    {
+        return $this->hasMany(Product::class);
     }
 }

@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\ProductSale;
 use App\Services\Contract\ProductService;
 use App\Utils\FileUpload;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -45,13 +46,11 @@ class ProductController extends Controller
 
  
     public function store(CreateProductRequest $request)
-    {
-        $request->validated();
-        $image = $this->productService->handleUploadImage($request->file('image_path'));
+    {   
         $product = $request->validated();
+        $image = $this->productService->handleUploadImage($request->file('image_path'));
         $product['image_path'] = $image;
-        $newProduct = $this->product->create($product);
-        $newProduct->productSale()->create($product);
+        $this->productService->createProduct($product);
         return redirect('/product');
     }
 
@@ -72,22 +71,13 @@ class ProductController extends Controller
 
     public function update(EditProductRequest $request, Product $product)
     {
-        $request->validated();
+        $data = $request->validated();
+
         $image = $this->productService->handleUploadImage($request->file('image_path'));
-        $product->product_name = $request->product_name;
-        $product->product_description = $request->product_description;
         if(!empty($image)){
-            $product->image_path = $request->product_name;
+            $product['image_path'] = $request->product_name;
         }
-        $product->link_url_shopee = $request->link_url_shopee;
-        $product->link_url_tokopedia = $request->link_url_tokopedia;
-        $product->status = $request->status;
-
-        $product->productSale->cost=$request->cost;
-        $product->productSale->weight=$request->weight;
-        $product->push();
-
-        $product->save();
+        $this->productService->updateProduct($data, $product);
         return redirect('/product');
     }
 

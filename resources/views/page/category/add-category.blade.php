@@ -28,7 +28,11 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @csrf
+                        <div class="form-group">
+                            <x-adminlte-input name="category_code" type="text" placeholder="Enter category code"
+                                label="Category Code" enable-old-support oninput="this.value = this.value.toUpperCase()" />
+                        </div>
+
                         <div class="form-group">
                             <x-adminlte-input name="category_name" type="text" placeholder="Enter category name"
                                 label="Category Name" enable-old-support />
@@ -66,6 +70,7 @@
 @section('js')
     <script>
         $(function() {
+
             $(".openLink").click(function(elem) {
 
                 var id = $(this).attr('data-input-id')

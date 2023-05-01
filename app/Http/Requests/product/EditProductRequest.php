@@ -25,12 +25,18 @@ class EditProductRequest extends FormRequest
     {
         return [
             'product_name' => 'required|max:255',
+            'product_summary' => 'max:100',
             'product_description' => 'required',
             'link_url_shopee'=>'url',
             'link_url_tokopedia'=>'url',
             'status'=>'required',
-            'image_path' => '|mimetypes:image/png,image/jpeg,image/svg|max:5120',
-
+            'image_path' => 'mimetypes:image/png,image/jpeg,image/svg|max:5120',
+            'product_sale.weight' => 'required|numeric|between:0.01,99.99',
+            'product_sale.cost' => 'required|numeric|between:1000,99999',
+            'product_additional_info.*.label' => 'required',
+            'product_additional_info.*.value' => 'required',
+            'product_additional_info.*.mode' => 'required',
+            'product_additional_info.*.id' => 'nullable',
         ];
     }
 }

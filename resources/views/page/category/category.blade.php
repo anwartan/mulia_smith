@@ -23,7 +23,7 @@
                     return 'badge-danger';
             }
         }
-        $heads = ['Category Name', 'Status', 'Created At', 'Updated At', ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
+        $heads = ['Category Code', 'Category Name', 'Status', 'Created At', 'Updated At', ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
         $data = [];
         
         foreach ($categories as $value) {
@@ -48,7 +48,7 @@
                                     </form>';
             $btnDetails = '';
             $status = '<span class="badge ' . getStatus($value->status->value) . '">' . $value->status->name . '</span>';
-            $data[] = [$value->category_name, $status, $value->created_at, $value->updated_at, '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>'];
+            $data[] = [$value->category_code, $value->category_name, $status, $value->created_at, $value->updated_at, '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>'];
         }
         $config = [
             'data' => $data,

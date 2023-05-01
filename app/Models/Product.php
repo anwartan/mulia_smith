@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\ProductStatusEnum;
+use App\Utils\SkuGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +14,7 @@ class Product extends Model
 
     protected $fillable = [
         'product_name', 
+        'product_summary',
         'product_description', 
         'sku', 
         'image_path',
@@ -37,9 +39,7 @@ class Product extends Model
     {
         parent::boot();
         static::creating(function ($model) {
-            
-            $size = count(Product::all())+1;
-            $model->sku = 'SKU'.$size;
+            $model->sku = SkuGenerator::generateProductSku($model);
             return true;
         });
     }
@@ -58,6 +58,12 @@ class Product extends Model
     {
         return $this->hasOne(ProductSale::class);
     }
+
+    public function productAdditionalInfos()
+    {
+        return $this->hasMany(ProductAdditionalInfo::class);
+    }
+
     public function getFullImagePathAttribute()
     {
         return url('files/'.$this->image_path);
