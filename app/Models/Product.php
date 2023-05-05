@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Casts\DatetimeToTimestamp;
 use App\Enums\ProductStatusEnum;
 use App\Utils\SkuGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Product extends Model
+class Product extends BaseModel
 {
     use HasFactory;
 
@@ -26,10 +27,16 @@ class Product extends Model
     ];
 
     protected $hidden = [
-        'id'
+        'id','category_id'
     ];
 
     protected $casts = [
+        'status' => ProductStatusEnum::class,
+    ];
+
+    protected $apiCasts = [
+        'created_at' => DatetimeToTimestamp::class,
+        'updated_at' => DatetimeToTimestamp::class,
         'status' => ProductStatusEnum::class,
     ];
 
@@ -66,6 +73,6 @@ class Product extends Model
 
     public function getFullImagePathAttribute()
     {
-        return url('files/'.$this->image_path);
+        return url('files/product/'.$this->image_path);
     }
 }

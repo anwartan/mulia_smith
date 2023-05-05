@@ -25,7 +25,7 @@ class ProductServiceImpl implements ProductService
     public function handleUploadImage($file): string {
         $filePath = "";
         if (!is_null($file)) {
-            $filePath = FileUpload::upload($file);
+            $filePath = FileUpload::upload($file,"/product/");
         } 
         return $filePath;
     }

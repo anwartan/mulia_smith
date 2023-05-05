@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductAdditionalInfoTable extends Migration
+class CreateWishlistItemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateProductAdditionalInfoTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_additional_infos', function (Blueprint $table) {
+        Schema::create('wishlist_items', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('wishlist_id');
             $table->bigInteger('product_id');
-            $table->string('label');
-            $table->string('value');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateProductAdditionalInfoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_additional_infos');
+        Schema::dropIfExists('wishlist_items');
     }
 }

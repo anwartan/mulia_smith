@@ -21,5 +21,7 @@ return [
     'product_section'               => 'PRODUCT',
     'product'                       => 'Product',
     'master_data_section'           => 'MASTER DATA',
-    'category'                      => 'Category'
+    'category'                      => 'Category',
+    'promotion'                     => 'Promotion',
+    'news-subscribe'                => 'News Subscribe'
 ];

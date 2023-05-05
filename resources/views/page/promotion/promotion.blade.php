@@ -1,12 +1,12 @@
 @extends('adminlte::page')
 
-@section('title', 'Category')
+@section('title', 'Promotion')
 
 @section('content_header')
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Category</h1>
+                <h1>Promotion</h1>
             </div>
         </div>
     </div>
@@ -23,19 +23,19 @@
                     return 'badge-danger';
             }
         }
-        $heads = ['Category Code', 'Category Name', 'Status', 'Created At', 'Updated At', ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
+        $heads = ['Promotion Title', 'Status', 'Created At', 'Updated At', ['label' => 'Actions', 'no-export' => true, 'width' => 5]];
         $data = [];
         
-        foreach ($categories as $value) {
+        foreach ($promotions as $value) {
             $btnEdit =
                 '<a href="' .
-                url("/category/{$value->uuid}/edit") .
+                url("/promotion/{$value->uuid}/edit") .
                 '" class="btn btn-xs btn-default text-primary mx-1 shadow" title="Edit">
 <i class="fa fa-lg fa-fw fa-pen"></i>
 </a>';
             $btnDelete =
                 '<form action="' .
-                route('category.destroy', $value->uuid) .
+                route('promotion.destroy', $value->uuid) .
                 '" method="POST" class="d-inline-flex">
                                        ' .
                 method_field('delete') .
@@ -48,7 +48,7 @@
                                     </form>';
             $btnDetails = '';
             $status = '<span class="badge ' . getStatus($value->status->value) . '">' . $value->status->name . '</span>';
-            $data[] = [$value->category_code, $value->category_name, $status, $value->created_at, $value->updated_at, '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>'];
+            $data[] = [$value->promotion_title, $status, $value->created_at, $value->updated_at, '<nobr>' . $btnEdit . $btnDelete . $btnDetails . '</nobr>'];
         }
         $config = [
             'data' => $data,
@@ -60,14 +60,14 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">List Categories</h3>
+                    <h3 class="card-title">List Promotions</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="row mb-4">
-                        <a class="btn btn-primary" href="{{ route('category.create') }}">
+                        <a class="btn btn-primary" href="{{ route('promotion.create') }}">
                             <i class="fa fa-plus"></i>
-                            Add Category
+                            Add Promotion
                         </a>
                     </div>
 

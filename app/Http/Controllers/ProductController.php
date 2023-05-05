@@ -75,7 +75,7 @@ class ProductController extends Controller
 
         $image = $this->productService->handleUploadImage($request->file('image_path'));
         if(!empty($image)){
-            $product['image_path'] = $request->product_name;
+            $product['image_path'] = $request->image;
         }
         $this->productService->updateProduct($data, $product);
         return redirect('/product');

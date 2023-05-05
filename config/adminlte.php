@@ -388,6 +388,16 @@ return [
             'url'  => 'product',
             'icon' => 'fas fa-fw fa-table',
         ],
+        [
+            'text' => 'promotion',
+            'url'  => 'promotion',
+            'icon' => 'fas fa-fw fa-table',
+        ],
+        [
+            'text' => 'news-subscribe',
+            'url'  => 'news-subscribe',
+            'icon' => 'fas fa-fw fa-table',
+        ],
     ],
 
     /*
