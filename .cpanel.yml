@@ -1,0 +1,5 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/muliasmi/admin.muliasmith.com
+
+    - /usr/bin/rsync -Paz * $DEPLOYPATH --update
