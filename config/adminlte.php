@@ -398,6 +398,12 @@ return [
             'url'  => 'news-subscribe',
             'icon' => 'fas fa-fw fa-table',
         ],
+        ['header' => 'schedule_data_section'],
+        [
+            'text' => 'price_gold',
+            'url'  => 'prices',
+            'icon' => 'fas fa-fw fa-table',
+        ],
     ],
 
     /*

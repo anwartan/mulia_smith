@@ -23,5 +23,7 @@ return [
     'master_data_section'           => 'MASTER DATA',
     'category'                      => 'Category',
     'promotion'                     => 'Promotion',
-    'news-subscribe'                => 'News Subscribe'
+    'news-subscribe'                => 'News Subscribe',
+    'schedule_data_section'         => 'SCHEDULE DATA',
+    'price_gold'                    => 'Price Gold',
 ];

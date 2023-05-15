@@ -16,7 +16,7 @@ class ContactUsController extends Controller
         $data = $request->validated();
         $mail = new ContactFormMail($data['subject'],$data['name'],$data['email'],$data['message']);
 
-        Mail::to('noreply@muliasmith.com')->send($mail);
+        Mail::send($mail);
         return ResponseMapper::success("Form successfully send");
     }
 }

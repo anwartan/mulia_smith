@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GoldPriceController;
 use App\Http\Controllers\NewsSubscribeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromotionController;
@@ -32,5 +33,6 @@ Route::middleware('role:MASTER,EMPLOYEE')->group(function(){
     Route::resource("category", CategoryController::class);
     Route::resource("promotion", PromotionController::class);
     Route::resource("news-subscribe", NewsSubscribeController::class);
+    Route::resource("prices", GoldPriceController::class);
 
 });

@@ -16,7 +16,7 @@ class ContactFormMail extends Mailable
 
     public $name;
     public $email;
-    public $message;
+    public $messageEmail;
 
     /**
      * Create a new message instance.
@@ -28,7 +28,7 @@ class ContactFormMail extends Mailable
         $this->subject = $subject;
         $this->name = $name;
         $this->email = $email;
-        $this->message = $message;
+        $this->messageEmail = $message;
     }
 
     /**
@@ -38,6 +38,8 @@ class ContactFormMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.contact-form')->from('noreply@muliasmith.com');
+        return $this->view('mail.contact-form')
+        ->from($this->email, $this->name)
+        ->to('noreply@muliasmith.com');
     }
 }

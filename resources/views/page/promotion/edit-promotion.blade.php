@@ -52,9 +52,15 @@
                         </div>
                         <div class="form-group">
                             <x-adminlte-input-file enable-old-support label="Promotion Image"
-                                accept="image/png, image/gif, image/jpeg" name="promotion_image_url"
+                                accept="image/png, image/gif, image/jpeg" name="promotion_image"
                                 placeholder="Choose promotion image">
                             </x-adminlte-input-file>
+                            @php
+                                $data = [$promotion->promotion_image_url];
+                            @endphp
+                            <x-file-viewer name="old_promotion_image_url" file="{{ $promotion->promotion_image_url }}"
+                                path="{{ $promotion->full_image_path }}"></x-file-viewer>
+
                         </div>
 
                         <div class="form-group">
@@ -80,7 +86,7 @@
         </div>
     </form>
 @stop
-
+@section('plugins.BsCustomFileInput', true)
 @section('css')
 
 @stop
