@@ -26,9 +26,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function () {
-            Log::info('Minute log message');
-        })->everyMinute();
+        $schedule->command('fetch:gold-price')->dailyAt('14:00');
     }
 
     /**
