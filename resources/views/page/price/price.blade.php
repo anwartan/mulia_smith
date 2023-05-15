@@ -35,8 +35,10 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <x-adminlte-info-box title="Current Price" text="{{ round($current_price->goldPriceIDRGram) }}"
-                        icon="fas fa-lg fa-coins text-dark" theme="gradient-teal" />
+                    @if (!is_null($current_price))
+                        <x-adminlte-info-box title="Current Price" text="{{ round($current_price->goldPriceIDRGram) }}"
+                            icon="fas fa-lg fa-coins text-dark" theme="gradient-teal" />
+                    @endif
                     <div class="tab-content p-0">
                         <!-- Morris chart - Sales -->
                         <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
